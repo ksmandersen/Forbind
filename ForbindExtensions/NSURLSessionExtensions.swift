@@ -43,7 +43,7 @@ extension URLSession {
 	public func getTasks() -> Promise<([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask])> {
 		let promise = Promise<([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask])>()
 		getTasksWithCompletionHandler {
-			promise.setValue($0 as [URLSessionDataTask], $1 as [URLSessionUploadTask], $2 as [URLSessionDownloadTask])
+			promise.setValue(($0 as [URLSessionDataTask], $1 as [URLSessionUploadTask], $2 as [URLSessionDownloadTask]))
 		}
 		return promise
 	}

@@ -10,14 +10,17 @@ import Foundation
 import Forbind
 
 extension NSURLConnection {
+    @available(*, introduced: 1.0, deprecated: 1.4.0, message: "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h")
 	public class func sendRequest(_ queue: OperationQueue) -> (URLRequest) -> Promise<Result<(URLResponse, Data)>> {
 		return { sendRequest($0, queue: queue) }
 	}
-	
+
+    @available(*, introduced: 1.0, deprecated: 1.4.0, message: "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h")
 	public class func sendURLRequest(_ queue: OperationQueue) -> (URL) -> Promise<Result<(URLResponse, Data)>> {
 		return { sendRequest(URLRequest(url: $0), queue: queue) }
 	}
-	
+
+    @available(*, introduced: 1.0, deprecated: 1.4.0, message: "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h")
 	public class func sendRequest(_ request: URLRequest, queue: OperationQueue) -> Promise<Result<(URLResponse, Data)>> {
 		let promise = Promise<Result<(URLResponse, Data)>>()
 		
@@ -26,7 +29,7 @@ extension NSURLConnection {
 				if let error = error {
 					promise.setValue(.error(error))
 				} else {
-					promise.setValue(.ok(response!, data!))
+					promise.setValue(.ok((response!, data!)))
 				}
 			}
 		})

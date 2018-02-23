@@ -154,7 +154,7 @@ public func combine<T, U>(_ t : T?, u : Result<U>) -> Result<(T, U)> {
 	case (.error(let e1), nil): return .error(CombinedError(e1, NilError()))
 	case (.error(let e1), _): return .error(e1)
 	case (_, nil): return .error(NilError())
-	case (.ok(let value1), .some(let value)): return .ok(value, value1)
+	case (.ok(let value1), .some(let value)): return .ok((value, value1))
 	case _: fatalError("Not gonna happen")
 	}
 }
@@ -210,7 +210,7 @@ public func ++<T, U>(t : T?, u : Promise<Result<U>>) -> Promise<Result<(T, U)>> 
 public func combine<T, U>(_ t : Result<T>, u : U) -> Result<(T, U)> {
 	switch (t, u) {
 	case (.error(let e1), _): return .error(e1)
-	case (.ok(let value1), let value): return .ok(value1, value)
+	case (.ok(let value1), let value): return .ok((value1, value))
 	}
 }
 
@@ -222,7 +222,7 @@ public func combine<T, U>(_ t : Result<T>, u : U?) -> Result<(T, U)> {
 	case (.error(let e1), nil): return .error(CombinedError(e1, NilError()))
 	case (.error(let e1), _): return .error(e1)
 	case (_, nil): return .error(NilError())
-	case (.ok(let value1), .some(let value)): return .ok(value1, value)
+	case (.ok(let value1), .some(let value)): return .ok((value1, value))
 	case _: fatalError("Not gonna happen")
 	}
 }
@@ -235,7 +235,7 @@ public func combine<T, U>(_ t : Result<T>, u : Result<U>) -> Result<(T, U)> {
 	case (.error(let e1), .error(let e2)): return .error(CombinedError(e1, e2))
 	case (.error(let e1), _): return .error(e1)
 	case (_, .error(let e2)): return .error(e2)
-	case (.ok(let value1), .ok(let value2)): return .ok(value1, value2)
+	case (.ok(let value1), .ok(let value2)): return .ok((value1, value2))
 	case _: fatalError("Not gonna happen")
 	}
 }
